@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E1E1E1"
+    android:orientation="vertical"
+    android:padding="3dip" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        tools:ignore="UselessParent" >
+
+        <ImageView
+            android:id="@+id/chat_compact_avatar_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dip"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/label_avatar"
+            android:maxHeight="25dip"
+            android:maxWidth="25dip"
+            android:src="@drawable/ic_default_contact" />
+
+        <ImageView
+            android:id="@+id/chat_compact_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/label_avatar"
+            android:src="@drawable/ic_chat_compact_left_arrow" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#FFF"
+            android:padding="3dip" >
+
+            <ImageView
+                android:id="@+id/chat_compact_attachment_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/label_attached_image"
+                android:src="@drawable/ic_attachment" />
+
+            <TextView
+                android:id="@+id/chat_compact_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/label_message"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

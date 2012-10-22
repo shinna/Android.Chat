@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">iChat</string>
+    <string name="label_username">Username</string>
+    <string name="label_password">Password</string>
+    <string name="label_login">Log In</string>
+    <string name="label_avatar">Avatar</string>
+    <string name="label_display_name">Display Name</string>
+    <string name="label_profile">Profile</string>
+    <string name="label_friends">Friends</string>
+    <string name="label_add_friend">Add friend</string>
+    <string name="label_log_out">Log Out</string>
+    <string name="label_settings">Settings</string>
+    <string name="symbol_plus">+</string>
+    <string name="label_send">Send</string>
+    <string name="label_message">Message</string>
+    <string name="label_just_now">just now</string>
+    <string name="label_attached_image">Attached Image</string>
+    <string name="label_attached_1_file">1 attached file/image</string>
+    <string name="label_receiving_file">downloading</string>
+    <string name="label_sending_file">uploading</string>
+</resources>

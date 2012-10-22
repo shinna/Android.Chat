@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/main_divider_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CCC"
+        android:padding="2dip"
+        android:text="@string/label_profile"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#333" />
+
+    <LinearLayout
+        android:id="@+id/main_user_panel_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/main_user_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/label_avatar"
+            android:maxHeight="50dip"
+            android:maxWidth="50dip"
+            android:src="@drawable/ic_default_contact" />
+
+        <TextView
+            android:id="@+id/main_user_display_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dip"
+            android:text="@string/label_display_name"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/main_divider_friends"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CCC"
+        android:padding="2dip"
+        android:text="@string/label_friends"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#333" />
+
+    <ListView
+        android:id="@+id/main_contact_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    </ListView>
+
+</LinearLayout>
