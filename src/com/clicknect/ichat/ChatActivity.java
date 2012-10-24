@@ -13,6 +13,7 @@ import org.jivesoftware.smackx.ServiceDiscoveryManager;
 import org.jivesoftware.smackx.filetransfer.FileTransfer.Status;
 import org.jivesoftware.smackx.filetransfer.FileTransferListener;
 import org.jivesoftware.smackx.filetransfer.FileTransferManager;
+import org.jivesoftware.smackx.filetransfer.FileTransferNegotiator;
 import org.jivesoftware.smackx.filetransfer.FileTransferRequest;
 import org.jivesoftware.smackx.filetransfer.IncomingFileTransfer;
 import org.jivesoftware.smackx.filetransfer.OutgoingFileTransfer;
@@ -209,10 +210,20 @@ public class ChatActivity extends Activity {
 			xmppConnection = MainActivity.getXMPPConnection();
 			if ( xmppConnection == null ) {
 				ChatActivity.this.finish();
-			} else {				
+			} else {
+				// For BEEM
+				FileTransferNegotiator.IBB_ONLY = true;
+				// -- END OF FOR BEEM
+				
 				// Enable Server Discovery Manager
 				ServiceDiscoveryManager sdm = new ServiceDiscoveryManager(xmppConnection);
-				sdm.addFeature("http://jabber.org/protocol/ibb");
+				// sdm.addFeature("http://jabber.org/protocol/ibb");
+				
+				// FOR BEEM
+				sdm.addFeature("http://jabber.org/protocol/disco#info");
+			     sdm.addFeature("http://jabber.org/protocol/disco#item");
+			     sdm.addFeature("jabber:iq:privacy");				
+				// -- END OF FOR BEEM 
 				
 				// Receive data from extras
 				fJID = bundle.getString("fJID");
@@ -262,7 +273,7 @@ public class ChatActivity extends Activity {
 					@Override
 					public void handleMessage(Message msg) {
 						switch ( msg.what ) {							
-							case 1:
+							case 1:								
 								org.jivesoftware.smack.packet.Message chatMessage;
 								chatMessage = (org.jivesoftware.smack.packet.Message) msg.obj;
 								
@@ -285,15 +296,17 @@ public class ChatActivity extends Activity {
 				};
 				chat = chatManager.createChat(fJID, new MessageListener() {
 					public void processMessage(Chat chat, final org.jivesoftware.smack.packet.Message chatMessage) {
-						new Thread() {
-							public void run() {
-								Message msg = new Message();
-								msg.what = 1;
-								msg.obj = chatMessage;
-								chatHandler.sendMessage(msg);
-							};
-						}.start();
-						Log.i(LOG_TAG, "Received message from: "+chatMessage.getFrom()+": "+chatMessage.getBody());
+						if ( chatMessage.getBody() != null ) {
+							new Thread() {
+								public void run() {
+									Message msg = new Message();
+									msg.what = 1;
+									msg.obj = chatMessage;
+									chatHandler.sendMessage(msg);
+								};
+							}.start();
+							Log.i(LOG_TAG, "Received message from: "+chatMessage.getFrom()+": "+chatMessage.getBody());
+						}
 					}
 				});				
 				

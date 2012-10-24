@@ -12,17 +12,18 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.provider.ProviderManager;
 import org.jivesoftware.smackx.GroupChatInvitation;
 import org.jivesoftware.smackx.PrivateDataManager;
-import org.jivesoftware.smackx.bytestreams.socks5.provider.BytestreamsProvider;
 import org.jivesoftware.smackx.packet.ChatStateExtension;
 import org.jivesoftware.smackx.packet.LastActivity;
 import org.jivesoftware.smackx.packet.OfflineMessageInfo;
 import org.jivesoftware.smackx.packet.OfflineMessageRequest;
 import org.jivesoftware.smackx.packet.SharedGroupsInfo;
 import org.jivesoftware.smackx.packet.VCard;
+import org.jivesoftware.smackx.provider.BytestreamsProvider;
 import org.jivesoftware.smackx.provider.DataFormProvider;
 import org.jivesoftware.smackx.provider.DelayInformationProvider;
 import org.jivesoftware.smackx.provider.DiscoverInfoProvider;
 import org.jivesoftware.smackx.provider.DiscoverItemsProvider;
+import org.jivesoftware.smackx.provider.IBBProviders;
 import org.jivesoftware.smackx.provider.MUCAdminProvider;
 import org.jivesoftware.smackx.provider.MUCOwnerProvider;
 import org.jivesoftware.smackx.provider.MUCUserProvider;
@@ -349,9 +350,21 @@ public class MainActivity extends Activity {
         pm.addExtensionProvider("inactive","http://jabber.org/protocol/chatstates", new ChatStateExtension.Provider());
         pm.addExtensionProvider("gone","http://jabber.org/protocol/chatstates", new ChatStateExtension.Provider());
         
-        //   File Transfer
-        pm.addIQProvider("si","http://jabber.org/protocol/si", new StreamInitiationProvider());
-        pm.addIQProvider("query","http://jabber.org/protocol/bytestreams", new BytestreamsProvider());
+        //  File Transfer - with ASMACK-ANDROID-7
+        	pm.addIQProvider("si","http://jabber.org/protocol/si", new StreamInitiationProvider());
+			pm.addIQProvider("query","http://jabber.org/protocol/bytestreams", new BytestreamsProvider());
+        
+        
+        //  File Transfer - WITH ASMACK-ANDDROID-7-BEEM
+        	pm.addIQProvider("si", "http://jabber.org/protocol/si", new StreamInitiationProvider());
+            pm.addIQProvider("query", "http://jabber.org/protocol/bytestreams", new BytestreamsProvider());
+            pm.addIQProvider("open","http://jabber.org/protocol/ibb", new IBBProviders.Open());
+            pm.addIQProvider("close","http://jabber.org/protocol/ibb", new IBBProviders.Close());
+            pm.addExtensionProvider("data","http://jabber.org/protocol/ibb", new IBBProviders.Data());        
+        
+        
+        
+        
         
         //  Group Chat Invitations
         pm.addExtensionProvider("x","jabber:x:conference", new GroupChatInvitation.Provider());
