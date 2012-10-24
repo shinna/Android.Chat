@@ -2,30 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#333"
+    android:orientation="horizontal"
     android:padding="20dip" >
-
-    <EditText
-        android:id="@+id/login_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/label_username" >
 
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/login_password"
+
+
+
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/label_password" />
-
-    <Button
-        android:id="@+id/login_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/label_login" />
+        android:layout_gravity="center_vertical"
+        android:background="#FFF"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+
+
+        <EditText
+            android:id="@+id/login_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_username"
+            android:inputType="text"
+            android:lines="1" />
+
+
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_password"
+            android:inputType="textPassword"
+            android:lines="1" />
+
+        <Button
+            android:id="@+id/login_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_login" />
+
+    </LinearLayout>
 
 </LinearLayout>

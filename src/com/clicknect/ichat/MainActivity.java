@@ -190,9 +190,9 @@ public class MainActivity extends Activity {
 					
 					// Log in complete
 					case LOGIN_COMPLETE:
-						progressDialog.setMessage("Logged In");
+						progressDialog.setMessage("Success");
 						progressDialog.dismiss();
-						Toast.makeText(context, "Welcome, "+userJID, Toast.LENGTH_LONG).show();
+						Toast.makeText(context, userJID, Toast.LENGTH_SHORT).show();
 						
 						userPreferences.saveCurrentUsername(username);
 						userPreferences.saveCurrentPassword(password);
@@ -434,7 +434,7 @@ public class MainActivity extends Activity {
 		if ( xmppConnection != null ) {
 			xmppConnection.disconnect();
 			Log.i(LOG_TAG, "Disconnected from server.");
-			Toast.makeText(context, "You have disconnected from server.", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "You have disconnected from server.", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
