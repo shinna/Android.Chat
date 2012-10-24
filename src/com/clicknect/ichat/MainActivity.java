@@ -351,20 +351,15 @@ public class MainActivity extends Activity {
         pm.addExtensionProvider("gone","http://jabber.org/protocol/chatstates", new ChatStateExtension.Provider());
         
         //  File Transfer - with ASMACK-ANDROID-7
-        	pm.addIQProvider("si","http://jabber.org/protocol/si", new StreamInitiationProvider());
-			pm.addIQProvider("query","http://jabber.org/protocol/bytestreams", new BytestreamsProvider());
-        
+//      pm.addIQProvider("si","http://jabber.org/protocol/si", new StreamInitiationProvider());
+//		pm.addIQProvider("query","http://jabber.org/protocol/bytestreams", new BytestreamsProvider());
         
         //  File Transfer - WITH ASMACK-ANDDROID-7-BEEM
-        	pm.addIQProvider("si", "http://jabber.org/protocol/si", new StreamInitiationProvider());
-            pm.addIQProvider("query", "http://jabber.org/protocol/bytestreams", new BytestreamsProvider());
-            pm.addIQProvider("open","http://jabber.org/protocol/ibb", new IBBProviders.Open());
-            pm.addIQProvider("close","http://jabber.org/protocol/ibb", new IBBProviders.Close());
-            pm.addExtensionProvider("data","http://jabber.org/protocol/ibb", new IBBProviders.Data());        
-        
-        
-        
-        
+        pm.addIQProvider("si", "http://jabber.org/protocol/si", new StreamInitiationProvider());
+        pm.addIQProvider("query", "http://jabber.org/protocol/bytestreams", new BytestreamsProvider());
+        pm.addIQProvider("open","http://jabber.org/protocol/ibb", new IBBProviders.Open());
+        pm.addIQProvider("close","http://jabber.org/protocol/ibb", new IBBProviders.Close());
+        pm.addExtensionProvider("data","http://jabber.org/protocol/ibb", new IBBProviders.Data());        
         
         //  Group Chat Invitations
         pm.addExtensionProvider("x","jabber:x:conference", new GroupChatInvitation.Provider());

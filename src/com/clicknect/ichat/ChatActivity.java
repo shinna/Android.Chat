@@ -221,8 +221,8 @@ public class ChatActivity extends Activity {
 				
 				// FOR BEEM
 				sdm.addFeature("http://jabber.org/protocol/disco#info");
-			     sdm.addFeature("http://jabber.org/protocol/disco#item");
-			     sdm.addFeature("jabber:iq:privacy");				
+			    sdm.addFeature("http://jabber.org/protocol/disco#item");
+			    sdm.addFeature("jabber:iq:privacy");				
 				// -- END OF FOR BEEM 
 				
 				// Receive data from extras
