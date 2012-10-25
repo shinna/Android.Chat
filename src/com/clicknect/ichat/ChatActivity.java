@@ -156,7 +156,7 @@ public class ChatActivity extends Activity {
 				String message = chatMessageEditText.getText().toString();
 				if ( message.trim().length() == 0 ) {
 					Toast.makeText(context, "Please fill up some text.", Toast.LENGTH_SHORT).show();
-				} else {
+				} else {					
 					try {
 						chat.sendMessage(message);
 						chatMessageEditText.setText(null);

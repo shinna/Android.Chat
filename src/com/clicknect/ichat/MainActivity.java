@@ -41,6 +41,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -60,6 +61,9 @@ import com.clicknect.ichat.adapter.ContactAdapter;
 import com.clicknect.ichat.entry.ContactEntry;
 import com.clicknect.ichat.helper.BitmapUtility;
 import com.clicknect.ichat.helper.UserPreferences;
+import com.clicknect.ichat.network.PingPacketFilter;
+import com.clicknect.ichat.network.PingPacketListener;
+import com.clicknect.ichat.network.PingProvider;
 
 public class MainActivity extends Activity {
 	
@@ -193,6 +197,12 @@ public class MainActivity extends Activity {
 					
 					// Log in complete
 					case LOGIN_COMPLETE:
+						// Keep me alive by sent/receive Ping Packet
+						if ( xmppConnection.isConnected() ) {
+							xmppConnection.addPacketListener(new PingPacketListener(xmppConnection), new PingPacketFilter());
+						}
+						
+						// Dismiss the progress dialog
 						progressDialog.setMessage("Success");
 						progressDialog.dismiss();
 						Toast.makeText(context, userJID, Toast.LENGTH_SHORT).show();
@@ -251,20 +261,6 @@ public class MainActivity extends Activity {
 									
 									contactEntry.setJid(rosterEntry.getUser());
 									
-									if ( fVCard.getNickName() == null ) {
-										contactEntry.setNickname(rosterEntry.getUser());
-									} else {
-										contactEntry.setNickname(fVCard.getNickName());
-									}
-									
-									if ( fVCard.getAvatar() == null ) {
-										contactEntry.setAvatarBitmap(null);
-										contactEntry.setAvatarByte(null);
-									} else {
-										contactEntry.setAvatarByte(fVCard.getAvatar());
-										contactEntry.setAvatarBitmap(BitmapUtility.convertByteArrayToBitmap(fVCard.getAvatar()));
-									}
-									
 									// Check is friend online?
 									Presence presence = userRoster.getPresence(rosterEntry.getUser());
 									if ( presence.isAvailable() || presence.isAway() ) {
@@ -275,6 +271,28 @@ public class MainActivity extends Activity {
 										contactEntry.setOnline(true);
 									} else {
 										contactEntry.setOnline(false);
+									}									
+									
+									// Display name
+									if ( fVCard.getNickName() == null ) {
+										contactEntry.setNickname(rosterEntry.getUser());
+									} else {
+										contactEntry.setNickname(fVCard.getNickName());
+									}
+									
+									// Avatar
+									if ( fVCard.getAvatar() == null ) {
+										contactEntry.setAvatarBitmap(null);
+										contactEntry.setAvatarByte(null);
+									} else {
+										contactEntry.setAvatarByte(fVCard.getAvatar());
+										
+										if ( contactEntry.isOnline() ) {
+											contactEntry.setAvatarBitmap(BitmapUtility.convertByteArrayToBitmap(contactEntry.getAvatarByte()));
+										} else {
+											Bitmap normalAvatar = BitmapUtility.convertByteArrayToBitmap(contactEntry.getAvatarByte());
+											contactEntry.setAvatarBitmap(BitmapUtility.convertBitmapToGrayScaleBitmap(normalAvatar));
+										}
 									}
 									
 									userContactEntries.add(contactEntry);
@@ -339,6 +357,9 @@ public class MainActivity extends Activity {
 	}
 	
 	public void configure(ProviderManager pm) {
+		// Add Ping-Pong Feature
+		pm.addIQProvider("ping", "urn:xmpp:ping", new PingProvider());		
+		
 		// Enable VCard feature
 		pm.addIQProvider("vCard", "vcard-temp", new VCardProvider());
 		
