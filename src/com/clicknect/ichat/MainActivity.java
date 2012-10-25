@@ -9,6 +9,8 @@ import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.Presence;
+import org.jivesoftware.smack.packet.Presence.Type;
 import org.jivesoftware.smack.provider.ProviderManager;
 import org.jivesoftware.smackx.GroupChatInvitation;
 import org.jivesoftware.smackx.PrivateDataManager;
@@ -201,6 +203,10 @@ public class MainActivity extends Activity {
 						// Display main layout
 						mainLayout.setVisibility(View.VISIBLE);
 						
+						// Send package to server to my status to "Available" (Online)
+						Presence userPresence = new Presence(Type.available);
+						xmppConnection.sendPacket(userPresence);
+						
 						// Get user information
 						// - user profile
 						userVCard = new VCard();
@@ -226,11 +232,14 @@ public class MainActivity extends Activity {
 						}
 						
 						// - user's friends (Roster)
-						userRoster = xmppConnection.getRoster();
+						userRoster = xmppConnection.getRoster();					
+						
+						// Store roster to collection
 						Collection<RosterEntry> rosterEntries = userRoster.getEntries();
 						if ( rosterEntries.size() == 0 ) {
 							Toast.makeText(context, "You don't have any friend.", Toast.LENGTH_SHORT).show();
-						} else {
+						} else {							
+							// Adjust text view for friends list
 							userFriendsListText.append(" ("+rosterEntries.size()+")");
 							
 							for ( RosterEntry rosterEntry : rosterEntries ) {
@@ -256,9 +265,21 @@ public class MainActivity extends Activity {
 										contactEntry.setAvatarBitmap(BitmapUtility.convertByteArrayToBitmap(fVCard.getAvatar()));
 									}
 									
+									// Check is friend online?
+									Presence presence = userRoster.getPresence(rosterEntry.getUser());
+									if ( presence.isAvailable() || presence.isAway() ) {
+										String onlineFrom = presence.getFrom();
+										String[] onlineFromResource = onlineFrom.split("/");
+										
+										contactEntry.setOnlineViaResource(onlineFromResource[1]);
+										contactEntry.setOnline(true);
+									} else {
+										contactEntry.setOnline(false);
+									}
+									
 									userContactEntries.add(contactEntry);
 									userContactAdapter.setData(userContactEntries);
-									userContactAdapter.notifyDataSetChanged();
+									userContactAdapter.notifyDataSetChanged();									
 								} catch (XMPPException e) {
 									Log.e(LOG_TAG, "Unable to load friend VCard: "+e.getMessage());
 								}

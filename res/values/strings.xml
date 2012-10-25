@@ -18,4 +18,5 @@
     <string name="label_attached_1_file">1 attached file/image</string>
     <string name="label_receiving_file">downloading</string>
     <string name="label_sending_file">uploading</string>
+    <string name="label_online_status">Online Status</string>
 </resources>

@@ -19,6 +19,8 @@ public final class R {
         public static final int ic_default_contact=0x7f020005;
         public static final int ic_ichat=0x7f020006;
         public static final int ic_launcher=0x7f020007;
+        public static final int ic_offline=0x7f020008;
+        public static final int ic_online=0x7f020009;
     }
     public static final class id {
         public static final int chat_attatchment_button=0x7f07000e;
@@ -40,24 +42,29 @@ public final class R {
         public static final int chat_send_file_progress_bar=0x7f07000a;
         public static final int chat_sending_file_text=0x7f070009;
         public static final int chat_top_layout=0x7f07000b;
-        public static final int contact_entry_avatar_image=0x7f070015;
-        public static final int contact_entry_display_name_text=0x7f070016;
+        public static final int contact_entry_avatar_image=0x7f070016;
+        public static final int contact_entry_avatar_panel=0x7f070015;
+        public static final int contact_entry_display_name_text=0x7f070018;
+        public static final int contact_entry_offline_image=0x7f07001a;
+        public static final int contact_entry_online_image=0x7f07001b;
+        public static final int contact_entry_online_status=0x7f070019;
+        public static final int contact_entry_user_panel=0x7f070017;
         public static final int file_picker_image=0x7f070000;
         public static final int file_picker_text=0x7f070001;
-        public static final int login_password=0x7f070018;
-        public static final int login_submit=0x7f070019;
-        public static final int login_username=0x7f070017;
-        public static final int main_contact_listview=0x7f070020;
-        public static final int main_divider_friends=0x7f07001f;
-        public static final int main_divider_profile=0x7f07001b;
-        public static final int main_layout=0x7f07001a;
-        public static final int main_menu_add_friend=0x7f070022;
-        public static final int main_menu_log_out=0x7f070024;
-        public static final int main_menu_settings=0x7f070023;
-        public static final int main_user_avatar=0x7f07001d;
-        public static final int main_user_display_name=0x7f07001e;
-        public static final int main_user_panel_layout=0x7f07001c;
-        public static final int splash_image=0x7f070021;
+        public static final int login_password=0x7f07001d;
+        public static final int login_submit=0x7f07001e;
+        public static final int login_username=0x7f07001c;
+        public static final int main_contact_listview=0x7f070025;
+        public static final int main_divider_friends=0x7f070024;
+        public static final int main_divider_profile=0x7f070020;
+        public static final int main_layout=0x7f07001f;
+        public static final int main_menu_add_friend=0x7f070027;
+        public static final int main_menu_log_out=0x7f070029;
+        public static final int main_menu_settings=0x7f070028;
+        public static final int main_user_avatar=0x7f070022;
+        public static final int main_user_display_name=0x7f070023;
+        public static final int main_user_panel_layout=0x7f070021;
+        public static final int splash_image=0x7f070026;
     }
     public static final class layout {
         public static final int file_picker_empty_view=0x7f030000;
@@ -85,6 +92,7 @@ public final class R {
         public static final int label_log_out=0x7f040009;
         public static final int label_login=0x7f040003;
         public static final int label_message=0x7f04000d;
+        public static final int label_online_status=0x7f040013;
         public static final int label_password=0x7f040002;
         public static final int label_profile=0x7f040006;
         public static final int label_receiving_file=0x7f040011;

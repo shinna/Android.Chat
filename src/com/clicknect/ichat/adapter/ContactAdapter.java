@@ -49,7 +49,10 @@ public class ContactAdapter extends BaseAdapter {
 			convertView = LayoutInflater.from(context).inflate(R.layout.layout_contact_entry, null);
 			holder = new ContactEntryHolder();
 			holder.avatarImage = (ImageView) convertView.findViewById(R.id.contact_entry_avatar_image);
+			holder.onlineImage = (ImageView) convertView.findViewById(R.id.contact_entry_online_image);
+			holder.offlineImage = (ImageView) convertView.findViewById(R.id.contact_entry_offline_image);
 			holder.displayNameText = (TextView) convertView.findViewById(R.id.contact_entry_display_name_text);
+			holder.onlineStatus = (TextView) convertView.findViewById(R.id.contact_entry_online_status);
 			convertView.setTag(holder);
 		} else {
 			holder = (ContactEntryHolder) convertView.getTag();
@@ -59,14 +62,23 @@ public class ContactAdapter extends BaseAdapter {
 			holder.avatarImage.setImageBitmap(data.get(position).getAvatarBitmap());
 		}
 		holder.displayNameText.setText(data.get(position).getNickname());
+		if ( data.get(position).isOnline() ) {
+			holder.onlineImage.setVisibility(View.VISIBLE);
+			holder.offlineImage.setVisibility(View.GONE);
+			holder.onlineStatus.setText("online via "+data.get(position).getOnlineViaResource());
+		} else {
+			holder.onlineImage.setVisibility(View.GONE);
+			holder.offlineImage.setVisibility(View.VISIBLE);
+			holder.onlineStatus.setText("offline");
+		}
 		
 		return convertView;
 	}
 	
 	private class ContactEntryHolder {
 		
-		public ImageView avatarImage;
-		public TextView displayNameText;
+		public ImageView avatarImage, onlineImage, offlineImage;
+		public TextView displayNameText, onlineStatus;
 		
 	}
 

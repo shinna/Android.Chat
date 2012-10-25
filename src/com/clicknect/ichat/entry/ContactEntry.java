@@ -9,6 +9,7 @@ public class ContactEntry {
 	private byte[] avatarByte;
 	private Bitmap avatarBitmap;
 	private boolean isOnline;
+	private String onlineViaResource;
 	
 	public ContactEntry() {
 		this.jid = null;
@@ -56,6 +57,14 @@ public class ContactEntry {
 	
 	public void setOnline(boolean isOnline) {
 		this.isOnline = isOnline;
+	}
+
+	public String getOnlineViaResource() {
+		return onlineViaResource;
+	}
+
+	public void setOnlineViaResource(String onlineViaResource) {
+		this.onlineViaResource = onlineViaResource;
 	}
 
 }
